@@ -1,0 +1,217 @@
+/* Обнуляем отступы */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #616161; /* Очень темный серый */
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow-x: hidden;
+}
+
+/* Шапка сайта */
+header {
+    background-color: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    border-bottom: 1px solid #333;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff0055; /* Твой неоновый розовый */
+    letter-spacing: 2px;
+}
+
+nav span {
+    margin-left: 30px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #aaa;
+}
+
+nav span:hover {
+    color: #ff0055;
+}
+
+/* 3D Окно */
+model-viewer {
+    width: 100%;
+    height: 70vh; /* 70% высоты экрана */
+    --poster-color: transparent;
+}
+
+/* Панель управления */
+.ui-panel {
+    padding: 30px;
+    background: #111;
+    border-top: 2px solid #ff0055;
+    text-align: center;
+}
+
+.control-group p {
+    margin-bottom: 15px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.color-picker {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+     flex-wrap: wrap; /*для переноса кнопок в другой ряд*/
+     margin-bottom: 15px; /*отступ от кружков до текста*/
+}
+
+.color-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    cursor: pointer;
+    transition: 0.2s;
+    flex-shrink: 0; /*  запрет кнопкам плющиться */
+
+}
+
+.color-btn:hover {
+    transform: scale(1.2);
+    border-color: #fff;
+}
+
+/* Кнопка, которая выбрана в данный момент */
+.color-btn.active {
+    transform: scale(1.3); /* Делаем её чуть больше остальных */
+    border-color: #fff;    /* Белый ободок */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); /* свечение */
+    z-index: 10; /* Чтобы она была поверх соседних */
+}
+
+/* Контейнер для стильного неонового кольца */
+#picker {
+    display: flex;
+    justify-content: center; /* Центрируем */
+    margin: 0px auto;       /* Отступы */
+}
+
+.custom-color-picker {
+    margin-top: 0px; /* Увеличили зазор, чтобы не слипалось */
+    text-align: center;
+}
+
+/* Заголовок над палитрой */
+.custom-color-picker p {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #666;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+/* Контейнер пластинки */
+#vinyl-record {
+    position: fixed;
+    bottom: 100px; /* Выше подвала */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #222 30%, #000 100%);
+    border: 2px solid #ff0055;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+    transition: 0.3s;
+}
+
+/* Центр пластинки (как наклейка) */
+.vinyl-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: #ff0055;
+    border-radius: 50%;
+}
+
+/* Анимация вращения */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Класс, который мы будем добавлять через JS, когда музыка играет */
+#vinyl-record.playing {
+    animation: spin 3s linear infinite;
+    box-shadow: 0 0 25px rgba(255, 0, 85, 0.8);
+}
+
+#vinyl-record:hover {
+    transform: scale(1.1);
+}
+
+.modal {
+    display: none; /* Изначально скрыто */
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9); /* Черный фон с прозрачностью */
+    backdrop-filter: blur(5px); /* Размытие того, что сзади */
+    overflow-y: auto; /* Разрешаем скролл внутри самого модального окна */
+}
+
+.modal-content {
+    margin: 2% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    max-height: 90vh; /* Чтобы окно не улетало за края экрана */
+}
+
+.close-modal {
+    color: #ff0055;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.media-card {
+    margin-bottom: 40px; /* Добавь этот зазор между фотками */
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;   /* Центрируем, если их будет мало */
+    margin-right: auto;
+}
+
+.media-grid img {
+    width: 100%;        /* Растягивается внутри карточки */
+    max-width: 500px;   /* НО не больше 500 пикселей (подбери под себя) */
+    height: auto;       /* Сохраняет пропорции */
+    border-radius: 12px;
+    border: 1px solid #333;
+    display: block;
+    margin: 0 auto;     /* Центрирует фотку */
+    transition: 0.3s;
+}
+
+/* Описание под фоткой */
+.media-card p {
+    margin-top: 10px;
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}

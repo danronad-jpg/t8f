@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T8F_KRD | Custom Atelier</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Подключаем 3D движок от Google (Model Viewer) -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
+</head>
+<body>
+
+    <header>
+        <div class="logo">T8F_KRD</div>
+        <nav>
+            <span>КОНФИГУРАТОР</span>
+            <span>ПРОЕКТЫ</span>
+            <span>МЕДИА</span>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Окно 3D просмотра -->
+        <model-viewer 
+    id="t8f-model"
+    src="assets/frame_stels.glb" 
+    ar 
+    ar-modes="webxr scene-viewer quick-look" 
+    camera-controls 
+    shadow-intensity="2" 
+    exposure="1.2"
+    environment-image="neutral"
+    auto-rotate>
+    
+    <!-- Кнопка запуска AR для смартфонов -->
+    <button slot="ar-button" id="ar-button">
+        ПОСМОТРЕТЬ В ГАРАЖЕ (AR)
+    </button>
+</model-viewer>
+
+        <!-- Блок управления конфигуратором -->
+        <div class="ui-panel">
+            <h3>КАСТОМИЗАЦИЯ</h3>
+            <div class="control-group">
+                <p>ЦВЕТ РАМЫ:</p>
+                <div class="color-picker">
+                    <button class="color-btn" data-color="#ea071a" style="background: #ea071a;"></button>
+                    <button class="color-btn" data-color="#f29a01" style="background: #f29a01;"></button>
+                    <button class="color-btn" data-color="#f8f40b" style="background: #f8f40b;"></button>
+                    <button class="color-btn" data-color="#07e31d" style="background: #07e31d;"></button>
+                    <button class="color-btn" data-color="#0be1f1" style="background: #0be1f1;"></button>
+                    <button class="color-btn" data-color="#0902d6" style="background: #0902d6;"></button>
+                    <button class="color-btn" data-color="#7a02d6" style="background: #7a02d6;"></button>
+                    <button class="color-btn" data-color="#2f2f2f" style="background: #0f0f0f;"></button>
+                    <button class="color-btn" data-color="#e7e7e7" style="background: #e7e7e7;"></button>
+                </div>
+                <p>СВОЙ ЦВЕТ:</p>
+                <div id="picker">
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Аудиофайл -->
+<audio id="bg-music"></audio>
+
+<!-- Кнопка-пластинка -->
+<div id="vinyl-record" class="vinyl">
+    <div class="vinyl-center"></div>
+
+</div>
+<!-- Скрытое окно Медиа -->
+<div id="media-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3 class="section-title">GARAGE ARCHIVE</h3>
+        <div class="media-grid">
+            <div class="media-card">
+                <img src="assets/bike_night.jpg" alt="Stels 450">
+                <p>STELS PILOT 450 [NIGHT SHIFT]</p>
+            </div>
+            <div class="media-card">
+                <img src="assets/angle_day.jpg" alt="Stels 450">
+                <p>STELS PILOT 450 lite</p>
+            </div>
+            <!-- Сюда добавим новые фото потом -->
+        </div>
+    </div>
+</div>
+
+    <!--САМАЯ ПОСЛЕДНЯЯ СТРОКА!!!-->
+   <script src="app.js"></script>
+   
+</body>
+</html>
