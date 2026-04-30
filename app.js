@@ -23,9 +23,9 @@ const vinyl = document.getElementById('vinyl-record');
 // Твой список треков в папке assets
 const playlist = [
     'assets/main_theme_1.mp3',
-    'assets/main_theme_2.mp3',
+    'assets/montagem_estilo_livre.mp3',
     'assets/main_theme_3.mp3',
-    'assets/montagem_estilo_livre.mp3'
+    'assets/main_theme_2.mp3'
 ];
 
 let currentTrack = 0;
