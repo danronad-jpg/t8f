@@ -24,7 +24,8 @@ const vinyl = document.getElementById('vinyl-record');
 const playlist = [
     'assets/main_theme_1.mp3',
     'assets/main_theme_2.mp3',
-    'assets/main_theme_3.mp3'
+    'assets/main_theme_3.mp3',
+    'assets/montagem_estilo_livre.mp3'
 ];
 
 let currentTrack = 0;
@@ -74,14 +75,17 @@ var colorPicker = new iro.ColorPicker("#picker", {
 // ГЛАВНЫЙ УЗЕЛ: Связь палитры с рамой
 colorPicker.on('color:change', function(color) {
     const modelViewer = document.querySelector('#t8f-model');
-    
-    // Проверяем, загрузилась ли модель
-    if (modelViewer && modelViewer.model) {
-        const material = modelViewer.model.materials[0]; // Берем первый материал рамы
-        if (material) {
+    const model = modelViewer.model;
+    if (!model) return;
+
+    // Перебираем все материалы в модели
+    model.materials.forEach(material => {
+        // Красим только тот, что называется Body_Paint
+        console.log("Вижу материал:", material.name); if (material.name ==='Body_Paint') {
             material.pbrMetallicRoughness.setBaseColorFactor(color.hexString);
         }
-    }
+        // Fork_Gold и Black_Rubber скрипт просто проигнорирует
+    });
     
     // Снимаем подсветку с кнопок-кружков
     const colorButtons = document.querySelectorAll('.color-btn');
